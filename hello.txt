@@ -1,3 +1,10 @@
 #include main() " , & : ; = + - && & && || 123
 while
 123 "hello123"
+int a = 1 + 2 + 4 / 2 + (4 + 10);
+float b = a;
+a = a + 2;
+printf
+scanf
+
+printf("hello1weqweqwe3");

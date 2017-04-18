@@ -16,6 +16,7 @@ import javax.script.ScriptException;
  * @author Arces
  */
 public class ArithmeticCalculator {
+
     private ScriptEngineManager sem;
     private ScriptEngine se;
     private static ArithmeticCalculator calInstance = new ArithmeticCalculator();
@@ -25,15 +26,21 @@ public class ArithmeticCalculator {
         this.se = sem.getEngineByName("JavaScript");
     }
 
-    public static ArithmeticCalculator getInstance(){
+    public static ArithmeticCalculator getInstance() {
         return calInstance;
     }
-    
-    public int evalInt(String equation) {
-        int result = 0;
 
+    public int evalInt(String equation) {
+        System.out.println("[int] evaluating " + equation);
+        int result = 0;
+        Object eval;
         try {
-            result = (int) Math.floor((double) se.eval(equation));
+            eval = se.eval(equation);
+            if (eval.toString().contains(".")) {
+                result = (int) Math.floor((double) eval);
+            } else {
+                result = (int) eval;
+            }
         } catch (ScriptException ex) {
             Logger.getLogger(ArithmeticCalculator.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -42,10 +49,17 @@ public class ArithmeticCalculator {
     }
 
     public float evalFloat(String equation) {
+        System.out.println("[float] evaluating " + equation);
         float result = 0;
+        Object eval;
 
         try {
-            result = (float) (Math.round((double) se.eval(equation) * 100d) / 100.0d);
+            eval = se.eval(equation);
+            if (eval.toString().contains(".")) {
+                result = (float) (Math.round((double) eval * 100d) / 100.0d);
+            } else {
+                result = (int) eval / (float) 1;
+            }
         } catch (ScriptException ex) {
             Logger.getLogger(ArithmeticCalculator.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,6 +5,7 @@
 ["][a-zA-Z0-9~`!@#$%^&*<>.,?;:]*["]	STR
 main	MAIN
 int	TINT
+float	TFLOAT
 \"	QUOTE
 [(]	OPENP
 [)]	CLOSEP
