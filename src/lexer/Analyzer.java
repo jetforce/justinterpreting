@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,8 @@ import java.util.regex.Pattern;
 public class Analyzer {
 
     public ArrayList<Category> categories;
+    public HashMap mapCategories;
+    
     private String regex;
     private Pattern pattern;
 
@@ -33,6 +36,7 @@ public class Analyzer {
 
     public Analyzer() {
         categories = new ArrayList<>();
+        mapCategories = new HashMap();
         //categories.add(new Category("EOF","\\z"));
     }
 
@@ -50,13 +54,14 @@ public class Analyzer {
         
         
         String s[];
-              
+        Category cat;      
         while (input.hasNextLine()) {
   
             String line = input.nextLine();
             s = line.split("\\t");
-        
-            categories.add(new Category(s[1],s[0]));
+            cat = new Category(s[1],s[0]);
+            categories.add(cat);
+            mapCategories.put(s[1], cat);
             
         }
         input.close();
@@ -99,8 +104,10 @@ public class Analyzer {
         return token;
     }
 
-    public void dump(Scanner inputStream, String filename) {
-
+    public ArrayList<Token> dump(Scanner inputStream, String filename) {
+        
+        ArrayList<Token> tokens = new ArrayList<>();
+        
         Token token = nextToken(inputStream);
         File f = new File(filename);
         PrintWriter out = null;
@@ -111,6 +118,7 @@ public class Analyzer {
                 out.println(token.getCategoryName() + "," + token.getStatement());
                 System.out.println(token.getCategoryName() + ">>" + token.getStatement());
                 
+                tokens.add(token);
                 token = nextToken(inputStream);
             }
         } catch (FileNotFoundException ex) {
@@ -118,14 +126,22 @@ public class Analyzer {
         }
 
         out.close();
+        
+        return tokens;
+        
     }
 
+    public HashMap getCategories(){
+        return this.mapCategories;
+    }
+     
     public static void main(String args[]) {
 
         try {
+            //Scanner s = new Scanner("(int)");
             Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens2.txt")));
+            a.loadCategories(new Scanner(new File("tokens3.txt")));
             a.loadRegex();
                 
             a.dump(s, "output.txt");

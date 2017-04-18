@@ -30,6 +30,4 @@ public class Token {
         return this.category.getName();
     }
     
-
-    
 }

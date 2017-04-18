@@ -1,0 +1,9 @@
+
+%token int ADD OPENP CLOSEP MULT 
+
+%var E T
+
+%start E
+
+E: T | T ADD T
+T: int | int MULT T |OPENP int CLOSEP
