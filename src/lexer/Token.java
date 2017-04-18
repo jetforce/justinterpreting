@@ -20,6 +20,14 @@ public class Token {
         this.category = category;
     }
     
+    public String getStatement(){
+        return statement;
+    }
+    
+    public String getCategoryName(){
+        return this.category.getName();
+    }
+    
 
     
 }

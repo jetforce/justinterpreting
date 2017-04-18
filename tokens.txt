@@ -1,0 +1,3 @@
+NUMBER,-?[0-9]+
+BUNARYOP,[*|/|+|-]
+WHITESPACE,[ \t\f\r\n]+
