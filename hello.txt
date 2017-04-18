@@ -8,3 +8,5 @@ printf
 scanf
 printf("hello1weqweqwe3");
 123 "hello123 wrwe"
+
+a + b

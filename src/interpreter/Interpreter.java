@@ -40,7 +40,7 @@ public class Interpreter {
         Variable var, tempVar;
         Pattern p = Pattern.compile("[a-z]");
         Matcher m;
-        boolean canPerform;
+        boolean canPerform, stopRemove;
 
         try {
             br = new BufferedReader(new FileReader(new File("output.txt")));
@@ -58,6 +58,7 @@ public class Interpreter {
                 if (line.contains("VAR")) {
                     val = "";
                     canPerform = true;
+                    stopRemove = false;
 
                     name = line.split(",")[1];
 
@@ -69,12 +70,16 @@ public class Interpreter {
                         var.setType(type);
                         var.setName(name);
                     }
-
-                    //remove whitespaces after var
-                    while ((line = br.readLine()).contains("WHITESPACE"));
-
+                    
+                    while(!stopRemove){
+                        line = br.readLine();
+                        if(line == null || !line.contains("WHITESPACE")){
+                            stopRemove = true;
+                        }
+                    }
+                    
                     //if '=' is detected, an assignment is happening
-                    if (line.contains("EQUALS")) {
+                    if (line != null && line.contains("EQUALS")) {
                         while (!(line = br.readLine()).contains(";")) {
                             System.out.println("line = " + line);
                             val += line.split(",")[1];
@@ -109,6 +114,7 @@ public class Interpreter {
                     }
                 }
             }
+
             Set<String> keys = symbolTable.keySet();
             System.out.println("==================\nVARIABLES IN TABLE\n==================");
             for (String key : keys) {
@@ -124,6 +130,7 @@ public class Interpreter {
     public void dumpUpdate() {
         PrintWriter out;
         Variable var;
+        System.out.println("=== DUMP ===");
         try {
             out = new PrintWriter(new BufferedWriter(new FileWriter("Interpreter Dump.txt", true)));
             Set<String> keys = symbolTable.keySet();
