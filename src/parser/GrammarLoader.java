@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParserController {
+public class GrammarLoader {
 
     private final String TOKEN_DIRECTIVE = "%token";
     private final String VAR_DIRECTIVE = "%var";
@@ -16,7 +16,7 @@ public class ParserController {
 
     private NonTerminalModel startingSymbol;
 
-    public ParserController(ArrayList<String> contents) {
+    public GrammarLoader() {
 
         symbols = new HashMap<>();
         tokens = new HashMap<>();
@@ -24,11 +24,9 @@ public class ParserController {
 
         startingSymbol = null;
 
-        generateGrammar(contents);
-
     }
 
-    private void generateGrammar(ArrayList<String> contents) {
+    public GrammarModel generateGrammar(ArrayList<String> contents) {
 
         listTokens(contents.remove(0));
         listVariables(contents.remove(0));
@@ -57,7 +55,9 @@ public class ParserController {
         }
 
         //System.out.println("\nSTARTING SYMBOL: " + startingSymbol.getName());
-
+        
+        return new GrammarModel(symbols, tokens, variables, startingSymbol);
+        
     }
 
     private void listTokens(String tokenString) {
