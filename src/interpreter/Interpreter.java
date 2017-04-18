@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 import java.util.logging.Level;
@@ -36,18 +37,27 @@ public class Interpreter {
     }
 
     public void interpret() {
-        String line, type = "", name, val;
+        String line, tempVal, type = "", name, val;
         Variable var, tempVar;
         Pattern p = Pattern.compile("[a-z]");
         Matcher m;
-        boolean canPerform, stopRemove;
+        boolean canPerform;
+        ArrayList<String> statements = new ArrayList<>();
+        int j = 0;
 
         try {
             br = new BufferedReader(new FileReader(new File("output.txt")));
 
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+//                System.out.println(line);
+                if (!line.contains("WHITESPACE")) {
+                    statements.add(line);
+                }
+            }
 
+            for (int i = 0; i < statements.size(); i++) {
+                line = statements.get(i);
+               // System.out.println(line);
                 if (line.contains("TINT")) {
                     type = "int";
                 } else if (line.contains("TFLOAT")) {
@@ -58,63 +68,67 @@ public class Interpreter {
                 if (line.contains("VAR")) {
                     val = "";
                     canPerform = true;
-                    stopRemove = false;
-
                     name = line.split(",")[1];
 
                     //check if var already has value
                     var = symbolTable.get(name);
                     if (var == null) {
+                        System.out.println("var created!");
                         //if var doesnt have a value, store in symbol table
                         var = new Variable();
                         var.setType(type);
                         var.setName(name);
                     }
-                    
-                    while(!stopRemove){
-                        line = br.readLine();
-                        if(line == null || !line.contains("WHITESPACE")){
-                            stopRemove = true;
-                        }
-                    }
-                    
-                    //if '=' is detected, an assignment is happening
-                    if (line != null && line.contains("EQUALS")) {
-                        while (!(line = br.readLine()).contains(";")) {
-                            System.out.println("line = " + line);
-                            val += line.split(",")[1];
-                        }
 
-                        val = val.trim();
+                    //iterate to move to next
+                    i++;
+                    if (i < statements.size()) {
+                        line = statements.get(i);
 
-                        //check if val contains other variables
-                        m = p.matcher(val);
+                        //if '=' is detected, an assignment is happening
+                        if (line.contains("EQUALS")) {
+                            j = i + 1;
+                            tempVal = statements.get(j);
 
-                        //replace all variables with their values
-                        while (m.find()) {
-                            tempVar = symbolTable.get(m.group());
-                            if (tempVar != null) {
-                                val = val.replace(m.group(), tempVar.getValue().toString());
-                            } else {
-                                System.out.println("ERROR: " + m.group() + " is undefined.");
-                                canPerform = false;
-                            }
-                        }
-
-                        if (canPerform) {
-                            if (var.getType().equals("int")) {
-                                var.setValue((Integer) calc.evalInt(val));
-                            } else {
-                                var.setValue((Float) calc.evalFloat(val));
+                            //append texts to val
+                            while (!tempVal.contains(";") && j < statements.size()) {
+                              //  System.out.println("line = " + tempVal);
+                                val += tempVal.split(",")[1];
+                                j++;
+                                tempVal = statements.get(j);
                             }
 
-                            symbolTable.put(name, var);
-                            dumpUpdate();
+                            System.out.println("val = " + val);
+                            val = val.trim();
+
+                            //check if val contains other variables
+                            m = p.matcher(val);
+
+                            //replace all variables with their values
+                            while (m.find()) {
+                                tempVar = symbolTable.get(m.group());
+                                if (tempVar != null) {
+                                    val = val.replace(m.group(), tempVar.getValue().toString());
+                                } else {
+                                    System.out.println("ERROR: " + m.group() + " is undefined.");
+                                    canPerform = false;
+                                }
+                            }
+
+                            if (canPerform) {
+                                if (var.getType().equals("int")) {
+                                    var.setValue((Integer) calc.evalInt(val));
+                                } else {
+                                    var.setValue((Float) calc.evalFloat(val));
+                                }
+
+                                symbolTable.put(name, var);
+                                dumpUpdate();
+                            }
                         }
                     }
                 }
             }
-
             Set<String> keys = symbolTable.keySet();
             System.out.println("==================\nVARIABLES IN TABLE\n==================");
             for (String key : keys) {

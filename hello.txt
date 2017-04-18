@@ -9,4 +9,8 @@ scanf
 printf("hello1weqweqwe3");
 123 "hello123 wrwe"
 
-a + b
+if(a > b){
+	b = a * b;
+} else{
+	a = a + 3;
+}
