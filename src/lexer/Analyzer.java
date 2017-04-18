@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,8 @@ import java.util.regex.Pattern;
 public class Analyzer {
 
     public ArrayList<Category> categories;
+    public HashMap mapCategories;
+    
     private String regex;
     private Pattern pattern;
 
@@ -33,6 +36,7 @@ public class Analyzer {
 
     public Analyzer() {
         categories = new ArrayList<>();
+        mapCategories = new HashMap();
         //categories.add(new Category("EOF","\\z"));
     }
 
@@ -50,13 +54,14 @@ public class Analyzer {
         
         
         String s[];
-              
+        Category cat;      
         while (input.hasNextLine()) {
   
             String line = input.nextLine();
             s = line.split("\\t");
-        
-            categories.add(new Category(s[1],s[0]));
+            cat = new Category(s[1],s[0]);
+            categories.add(cat);
+            mapCategories.put(s[1], cat);
             
         }
         input.close();
@@ -120,6 +125,10 @@ public class Analyzer {
         out.close();
     }
 
+    public HashMap getCategories(){
+        return this.mapCategories;
+    }
+     
     public static void main(String args[]) {
 
         try {
