@@ -9,6 +9,8 @@ float	TFLOAT
 \"	QUOTE
 [(]	OPENP
 [)]	CLOSEP
+[{]	OPENB
+[}]	CLOSEB
 ,	COMMA
 &&	LAND
 &	AMPERSAND

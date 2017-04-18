@@ -30,6 +30,7 @@ VAR, int, a, 19
 VAR, float, b, 19.0
 VAR, int, a, 21
 ===
+<<<<<<< HEAD
 VAR, int, a, 19
 ===
 VAR, float, b, 19.0
@@ -38,3 +39,5 @@ VAR, int, a, 19
 VAR, float, b, 19.0
 VAR, int, a, 21
 ===
+=======
+>>>>>>> a12eb9f302eebefd1b88868959ec0faa9dbfb967
