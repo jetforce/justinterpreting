@@ -32,29 +32,6 @@ public class GrammarLoader {
         listVariables(contents.remove(0));
         getStartingSymbol(contents.remove(0));
         generateProductions(contents);
-
-        /*
-        System.out.println("\nSYMBOLS (" + symbols.size() + "): ");
-        for (TerminalModel terminal : symbols.values()) {
-            System.out.println(terminal.getName());
-        }
-
-        System.out.println("\nTOKENS (" + tokens.size() + "): ");
-        for (TerminalModel terminal : tokens.values()) {
-            System.out.println(terminal.getName());
-        }
-        */
-        
-        System.out.println("\nVARIABLES (" + variables.size() + "): ");
-        for (NonTerminalModel variable : variables.values()) {
-            System.out.println("\n" + variable.getName());
-            System.out.println("PRODUCTIONS: " + variable.getProductions().size());
-            for (ProductionModel production : variable.getProductions()) {
-                System.out.println(production);
-            }
-        }
-
-        //System.out.println("\nSTARTING SYMBOL: " + startingSymbol.getName());
         
         return new GrammarModel(symbols, tokens, variables, startingSymbol);
         

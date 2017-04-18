@@ -38,6 +38,7 @@ public class Main {
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
             
             GrammarModel grammar = new GrammarLoader().generateGrammar(contents);
+            System.out.println(grammar.toString());
             
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);

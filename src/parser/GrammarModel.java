@@ -31,7 +31,37 @@ public class GrammarModel {
         this.startingSymbol = startingSymbol;
         
     }
+    
+    public String toString() {
+        
+        String s = "";
+        
+        
+        s += "\nSYMBOLS (" + symbols.size() + "): ";
+        for (TerminalModel terminal : symbols.values()) {
+            s += "\n" + terminal.getName();
+        }
 
+        s += "\nTOKENS (" + tokens.size() + "): ";
+        for (TerminalModel terminal : tokens.values()) {
+            s += "\n" + terminal.getName();
+        }
+        
+        
+        s += "\nVARIABLES (" + variables.size() + "): ";
+        for (NonTerminalModel variable : variables.values()) {
+            s += "\n" + variable.getName();
+            s += "\nPRODUCTIONS: " + variable.getProductions().size();
+            for (ProductionModel production : variable.getProductions()) {
+                s += "\n" + production;
+            }
+        }
+
+        s += "\nSTARTING SYMBOL: " + startingSymbol.getName();
+        
+        return s;
+    }
+    
     /**
      * @return the symbols
      */
