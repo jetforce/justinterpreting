@@ -13,11 +13,13 @@ public class Token {
     
     private String statement;
     private Category category;
-  
+    private int startIndex, endIndex;
     
-    public Token(String statement, Category category){
+    public Token(String statement, Category category, int start, int end){
         this.statement = statement;
         this.category = category;
+        startIndex = start;
+        endIndex = end;
     }
     
     public String getStatement(){
