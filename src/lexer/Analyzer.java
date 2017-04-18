@@ -90,7 +90,7 @@ public class Analyzer {
         for (int i = 0; i < this.categories.size(); i++) {
             if (inputStream.match().group(i + 1) != null) {
 
-                token = new Token(foundMatch, this.categories.get(i));
+                token = new Token(foundMatch, this.categories.get(i), inputStream.match().start(),inputStream.match().end());
                 break;
             }
 

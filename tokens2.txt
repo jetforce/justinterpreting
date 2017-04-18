@@ -2,7 +2,7 @@
 #include	INCLUDE
 <stdio.h>	STDIO
 -?[0-9]+	INT
-["][a-zA-Z0-9~`!@#$%^&*<>.,?;:]*["]	STR
+["][a-zA-Z0-9~`!@#$%^&*<>.,?;: \n\t\r]*["]	STR
 main	MAIN
 int	TINT
 float	TFLOAT
