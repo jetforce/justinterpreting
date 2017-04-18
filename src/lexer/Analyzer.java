@@ -104,8 +104,10 @@ public class Analyzer {
         return token;
     }
 
-    public void dump(Scanner inputStream, String filename) {
-
+    public ArrayList<Token> dump(Scanner inputStream, String filename) {
+        
+        ArrayList<Token> tokens = new ArrayList<>();
+        
         Token token = nextToken(inputStream);
         File f = new File(filename);
         PrintWriter out = null;
@@ -116,6 +118,7 @@ public class Analyzer {
                 out.println(token.getCategoryName() + "," + token.getStatement());
                 System.out.println(token.getCategoryName() + ">>" + token.getStatement());
                 
+                tokens.add(token);
                 token = nextToken(inputStream);
             }
         } catch (FileNotFoundException ex) {
@@ -123,6 +126,9 @@ public class Analyzer {
         }
 
         out.close();
+        
+        return tokens;
+        
     }
 
     public HashMap getCategories(){
