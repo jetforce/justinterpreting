@@ -5,46 +5,39 @@
  */
 package recparser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import lexer.Analyzer;
 import lexer.Token;
+import parser.ParserController;
+import parser.TXTIO;
 
 /**
  *
  * @author jet
  */
 public class Parser {
-    
 
-    public static Parser instance = new Parser();
-    public static Parser getInstance(){
-        return Parser.instance;
-    }
-    
-    private HashMap grammar;
-    
-    public Parser(){
-        grammar = new HashMap();
-    }
 
-    public void loadGrammar(){
-        
+    
+    public static void main(String args[]) throws FileNotFoundException {
+
+        Scanner s = new Scanner("(int)");
         Analyzer a = Analyzer.getInstance();
-        HashMap cats = a.getCategories();
+        a.loadCategories(new Scanner(new File("tokens3.txt")));
+        a.loadRegex();
         
-        ArrayList<Production> temp = new ArrayList<>();
-        ArrayList<Alphabet> alphs = new ArrayList<>();
-                
-        alphs.add(new Alphabet((Token)cats.get("T")));
-        
-        temp.add(new Production(alphs));
+        ArrayList<String> contents = TXTIO.read("cgrammar2.txt");
+
+        ParserController  pc = new ParserController(contents);
         
         
         
-        
+        //a.dump(s, "output.txt");
+
     }
 
-    
-    
 }

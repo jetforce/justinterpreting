@@ -132,9 +132,10 @@ public class Analyzer {
     public static void main(String args[]) {
 
         try {
+            //Scanner s = new Scanner("(int)");
             Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens2.txt")));
+            a.loadCategories(new Scanner(new File("tokens3.txt")));
             a.loadRegex();
                 
             a.dump(s, "output.txt");

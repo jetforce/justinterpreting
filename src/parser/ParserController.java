@@ -10,11 +10,11 @@ public class ParserController {
     private final String VAR_DIRECTIVE = "%var";
     private final String START_DIRECTIVE = "%start";
 
-    private final Map<String, TerminalModel> symbols;
-    private final Map<String, TerminalModel> tokens;
-    private final Map<String, NonTerminalModel> variables;
+    public Map<String, TerminalModel> symbols;
+    public Map<String, TerminalModel> tokens;
+    public Map<String, NonTerminalModel> variables;
 
-    private NonTerminalModel startingSymbol;
+    public NonTerminalModel startingSymbol;
 
     public ParserController(ArrayList<String> contents) {
 
