@@ -66,4 +66,18 @@ public class ArithmeticCalculator {
 
         return result;
     }
+
+    public boolean evalCond(String cond) {
+        System.out.println("[condition] evaluating " + cond);
+        boolean isTrue = true;
+
+        try {
+            isTrue = (boolean) se.eval(cond);
+            
+        } catch (ScriptException ex) {
+            Logger.getLogger(ArithmeticCalculator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return isTrue;
+    }
 }

@@ -32,10 +32,14 @@ public class Variable {
      * @return the value
      */
     public Object getValue() {
-        if (this.type.equals("int")) {
-            return Integer.parseInt(value.toString().substring(0, value.toString().indexOf(".")));
+        if (this.value != null) {
+            if (this.type.equals("int")) {
+                return Integer.parseInt(value.toString().substring(0, value.toString().indexOf(".")));
+            } else {
+                return Float.valueOf(value.toString());
+            }
         } else {
-            return Float.valueOf(value.toString());
+            return null;
         }
     }
 
