@@ -40,6 +40,7 @@ public class Analyzer {
         categories.add(new Category("NUMBER", "-?[0-9]+"));
         categories.add(new Category("BINARYOP", "[*|/|+|-]"));
         categories.add(new Category("WHITESPACE", "[ \t\f\r\n]+"));
+        
 
         //Always Add Error
         categories.add(new Category("ERROR", ".+"));
@@ -53,12 +54,13 @@ public class Analyzer {
         while (input.hasNextLine()) {
   
             String line = input.nextLine();
-            s = line.split(",");
-            categories.add(new Category(s[0],s[1]));
+            s = line.split("\\t");
+        
+            categories.add(new Category(s[1],s[0]));
             
         }
         input.close();
-            
+           
         categories.add(new Category("ERROR", ".+"));
         
         
@@ -107,7 +109,7 @@ public class Analyzer {
             out = new PrintWriter(f);
             while (token != null) {
                 out.println(token.getCategoryName() + "," + token.getStatement());
-                System.out.println(token.getCategoryName() + "," + token.getStatement());
+                System.out.println(token.getCategoryName() + ">>" + token.getStatement());
                 
                 token = nextToken(inputStream);
             }
@@ -123,7 +125,7 @@ public class Analyzer {
         try {
             Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens.txt")));
+            a.loadCategories(new Scanner(new File("tokens2.txt")));
             a.loadRegex();
                 
             a.dump(s, "output.txt");
