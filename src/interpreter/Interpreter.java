@@ -37,14 +37,15 @@ public class Interpreter {
     }
 
     public void interpret() {
-        String s, tempVal, type = "", name, val;
+        String s, tempVal, type = "", name, val, cond;
         Variable var, tempVar;
         Pattern p = Pattern.compile("[a-z]");
         Matcher m;
-        boolean canPerform, insideLoop = false;
+        boolean canPerform, insideLoop = false, insideSwitch = false;
         ArrayList<String> statements = new ArrayList<>();
         ArrayList<String> bracketStack = new ArrayList<>();
         ArrayList<String> loopBracket = new ArrayList<>();
+        ArrayList<String> switchBracket = new ArrayList<>();
         int j, forIndex = 0;
 
         try {
@@ -67,7 +68,7 @@ public class Interpreter {
                         loopBracket.remove(loopBracket.size() - 1);
                     }
                 }
-                System.out.println("loop = " + loopBracket);
+                //System.out.println("loop = " + loopBracket);
                 //loop
                 if (insideLoop && loopBracket.isEmpty()) {
                     i = forIndex;
@@ -288,7 +289,7 @@ public class Interpreter {
                             s = statements.get(i);
                         }
                     }
-                    System.out.println("after = " + s);
+                    //System.out.println("after = " + s);
 
                     val = "";
                     j = i + 1;
@@ -365,6 +366,93 @@ public class Interpreter {
                             }
                         }
                     }
+                }
+
+                /* ===========================================================================
+                 If a switch is seen
+                 ================================================ */
+                if (s.contains("SWITCH")) {
+                    val = "";
+                    switchBracket.clear();
+
+                    System.out.println("IM A SWITCCH");
+                    //skip '('
+                    i += 2;
+                    s = statements.get(i);
+                    while (!s.contains(")")) {
+                        val += s.split(",")[1];
+                        i++;
+                        s = statements.get(i);
+                    }
+                    System.out.println("valllllll = " + val);
+                    i++;
+                    s = statements.get(i);
+
+                    switchBracket.add("{");
+                    //case, default or equal brackets
+                    //while end of switch is not seen, search for a case
+
+                    while (!insideSwitch && !switchBracket.isEmpty() && !s.contains("DEFAULT")) {
+                        i++;
+                        s = statements.get(i);
+                        if (s.contains("OPENB")) {
+                            switchBracket.add("{");
+                        } else if (s.contains("CLOSEB")) {
+                            switchBracket.remove(switchBracket.size() - 1);
+                        }
+
+                        //if s contains case, get value
+                        if (s.contains("CASE")) {
+                            i++;
+                            s = statements.get(i);
+                            tempVal = s.split(",")[1];
+
+                            //compare var val with case val
+                            cond = val + " === " + tempVal;
+
+                            //check if val contains other variables
+                            m = p.matcher(cond);
+
+                            //replace all variables with their values
+                            while (m.find()) {
+                                tempVar = symbolTable.get(m.group());
+                                if (tempVar != null) {
+                                    cond = cond.replace(m.group(), tempVar.getValue().toString());
+                                } else {
+                                    System.out.println("ERROR: " + m.group() + " is undefined.");
+                                    canPerform = false;
+                                }
+                            }
+                            if (calc.evalCond(cond)) {
+                                System.out.println("HEHEHE I AM TRUE");
+                                insideSwitch = true;
+                            }
+                        }
+                    }
+
+                    if (s.contains("DEFAULT")) {
+                        System.out.println("I AM DEFAULT");
+                        insideSwitch = true;
+                    }
+                    System.out.println("S IS = " + s);
+                }
+
+                /* ===========================================================================
+                 If a switch is seen
+                 ================================================ */
+                if (insideSwitch && s.contains("BREAK")) {
+                    while (!switchBracket.isEmpty()) {
+//                                System.out.println("bracket count = " + bracketStack.size() + " | s: " + s);
+                        i++;
+                        s = statements.get(i);
+
+                        if (s.contains("OPENB")) {
+                            switchBracket.add("{");
+                        } else if (s.contains("CLOSEB")) {
+                            switchBracket.remove(switchBracket.size() - 1);
+                        }
+                    }
+                    System.out.println("END BREAK: S IS " + s);
                 }
             }
             Set<String> keys = symbolTable.keySet();
