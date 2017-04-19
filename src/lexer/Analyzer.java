@@ -97,7 +97,7 @@ public class Analyzer {
             }
 
         }
-        
+
         if(token.getCategoryName().equals("WHITESPACE")){
             return nextToken(inputStream);
         }
