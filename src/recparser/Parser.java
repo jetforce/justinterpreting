@@ -136,7 +136,7 @@ public class Parser {
     public static void main(String args[]) throws FileNotFoundException {
 
         try {
-            Scanner input = new Scanner("int");
+            Scanner input = new Scanner("(int) + (int)");
             
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
@@ -150,17 +150,17 @@ public class Parser {
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
             GrammarModel grammar = new GrammarLoader().generateGrammar(contents);
-
+            
             Map m = grammar.getVariables();
             Set<String> keys = m.keySet();
 
             NonTerminalModel model;
             ArrayList<ProductionModel> prods;
             ArrayList<TerminalModel> terminals;
-
-            Parser parser = new Parser(grammar, tokens, "E");
+                                        
+            Parser parser = new Parser(grammar, tokens, grammar.getStartingSymbol().getName());
             boolean jet = parser.parse(0, 0, 0);
-
+            
             System.out.println("DID YOU GENERATE IT? " + jet);
 
             for (String str : keys) {
@@ -171,7 +171,7 @@ public class Parser {
                 for (ProductionModel pm : prods) {
                     System.out.println("Next prod");
                     terminals = pm.getSymbols();
-
+                    
                     for (TerminalModel tm : terminals) {
                         System.out.println("    " + tm.getName());
                     }

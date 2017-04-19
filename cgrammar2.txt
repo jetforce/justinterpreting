@@ -1,9 +1,9 @@
 
-%token int ADD OPENP CLOSEP MULT 
+%token int ADD OPENP CLOSEP MULT WHITESPACE
 
-%var E T
+%var EX T E
 
-%start E
+%start EX
 
-E: T | T ADD T
+EX: T | T ADD T | E
 T: int | int MULT T |OPENP int CLOSEP

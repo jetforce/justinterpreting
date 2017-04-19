@@ -1,4 +1,4 @@
-[ \t\f\r\n]	WHITESPACE 
+[ \t\f\r\n]	WHITESPACE
 #include	INCLUDE
 <stdio.h>	STDIO
 -?[0-9]+	INT
