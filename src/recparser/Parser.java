@@ -143,17 +143,17 @@ public class Parser {
     public static void main(String args[]) throws FileNotFoundException {
 
         try {
-            Scanner input = new Scanner("int int");
+            Scanner input = new Scanner(new File("HelloWorld.txt"));
             
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens3.txt")));
+            a.loadCategories(new Scanner(new File("tokens2.txt")));
             a.loadRegex();
 
             ArrayList<Token> tokens = a.dump(input, "output.txt");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar2.txt";
+            String GRAMMAR_FILENAME = "cgrammar.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
