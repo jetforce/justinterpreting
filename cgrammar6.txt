@@ -1,0 +1,51 @@
+
+%token INCLUDE MAIN STDIO QUOTE OPENP CLOSEP OPENB CLOSEB COMMA AMPERSAND SEMICOLON COLON EQUALS ADD SUBTRACT MULTIPLY DIVIDE CEQUALS CLESSTHAN CMORETHAN CLESSTHANEQUALTO CMORETHANEQUALTO CNOTEQUAL LAND LOR INT FLOAT VAR PRINTF SCANF IF ELSE BREAK SWITCH CASE DEFAULT FOR WHILE STR TINT TFLOAT DEFINE ICONSTANT
+
+%var E program statement args v printf scanf expression operation counter dec assign cond comp logic ifelse else break case switch for while define nums
+
+%start program
+
+program: INCLUDE STDIO define MAIN OPENP CLOSEP OPENB statement CLOSEB
+
+define: E | DEFINE ICONSTANT nums
+
+statement: E | printf statement | scanf statement | dec statement | assign statement | ifelse statement | switch statement | for statement | while statement | counter SEMICOLON statement
+
+nums: INT | FLOAT
+
+args: E | COMMA v args
+
+v: VAR | AMPERSAND VAR
+
+printf:	PRINTF OPENP STR args CLOSEP SEMICOLON
+
+scanf: SCANF OPENP STR args CLOSEP SEMICOLON
+
+expression: nums | VAR | nums operation expression | VAR operation expression | OPENP expression operation expression CLOSEP | OPENP expression CLOSEP | counter
+
+operation: ADD | SUBTRACT | MULTIPLY | DIVIDE
+
+counter: VAR ADD ADD | VAR SUBTRACT SUBTRACT
+
+dec: TINT VAR SEMICOLON | TFLOAT VAR SEMICOLON
+
+assign: VAR EQUALS expression SEMICOLON
+
+cond: E | expression comp expression logic cond
+
+comp: CEQUALS | CLESSTHAN | CMORETHAN | CLESSTHANEQUALTO | CMORETHANEQUALTO | CNOTEQUAL
+
+logic: E | LAND | LOR
+
+ifelse: IF OPENP cond CLOSEP OPENB statement CLOSEB else
+
+else: E | ELSE OPENB statement CLOSEB
+
+break: E | BREAK SEMICOLON
+
+case: E | CASE nums COLON break statement break case
+
+switch: SWITCH OPENP VAR CLOSEP OPENB CASE nums COLON break statement break case CLOSEB | SWITCH OPENP VAR CLOSEP OPENB CASE nums COLON break statement break case DEFAULT COLON statement CLOSEB
+
+for: FOR OPENP assign cond SEMICOLON expression CLOSEP OPENB break statement break CLOSEB
+while: WHILE OPENP cond CLOSEP OPENB break statement break CLOSEB
