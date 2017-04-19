@@ -5,7 +5,7 @@
 [-+]?[0-9]+[.][0-9]+[eE][-+]?[0-9]+	FLOAT
 [-+]?[0-9]+[.][0-9]+	FLOAT
 -?[0-9]+	INT
-["][a-zA-Z0-9~`!@#$%^&*<>.,?;: \n\t\r]*["]	STR
+["][a-zA-Z0-9~\\`!@#$%^&*<>.,?;: \n\t\r]*["]	STR
 main	MAIN
 int	TINT
 float	TFLOAT
@@ -41,6 +41,6 @@ case	CASE
 default	DEFAULT
 for	FOR
 while	WHILE
-["][a-zA-Z0-9~`!@#$%^&*<>.,?;:]*["]	STR
+["][a-zA-Z0-9~\\`!@#$%^&*<>.,?;:]*["]	STR
 [a-zA-Z][a-zA-Z]	ICONSTANT
 [a-z]	VAR

@@ -12,29 +12,29 @@ main() {
 	
 	int i;
 	for(i = 0; i < 5; i++) {
-		printf("Hello World!");
+		printf("Hello World!\n");
 		
 		if(i < 2) {
 			int j;
 			scanf("%d", &j);
-			printf("%d", j);
+			printf("%d\n", j);
 		}
 		
 		switch(i) {
-			case 1: printf("Current integer is one"); 
+			case 1: printf("Current integer is one\n"); 
 			break;
-			case 2: printf("Current integer is two"); 
+			case 2: printf("Current integer is two\n"); 
 			break;
-			case 3: printf("Current integer is three"); 
+			case 3: printf("Current integer is three\n"); 
 			break;
-			default: printf("Current integer is either four or five");
+			default: printf("Current integer is either four or five\n");
 		}
 	}
 
 	while(i > 5 && i < 10) {
 		scanf("%d", &i);
-		printf("%d", i);
+		printf("%d\n", i);
 	}
 
-	printf("Bye World!");
+	printf("Bye World!\n");
 }
