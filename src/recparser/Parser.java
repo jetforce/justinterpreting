@@ -156,7 +156,7 @@ public class Parser {
             String GRAMMAR_FILENAME = "cgrammar2.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
-            GrammarModel grammar = new GrammarLoader().generateGrammar(contents);
+            GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
             
             Map m = grammar.getVariables();
             Set<String> keys = m.keySet();
