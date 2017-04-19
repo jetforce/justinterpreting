@@ -63,9 +63,7 @@ public class Analyzer {
 
         }
         input.close();
-
-        categories.add(new Category("ERROR", ".+"));
-
+        
     }
 
     public void loadRegex() {

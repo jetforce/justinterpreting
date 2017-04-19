@@ -155,7 +155,7 @@ public class Parser {
             
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens4.txt")));
+            a.loadCategories(new Scanner(new File("tokens5.txt")));
             a.loadRegex();
 
             ArrayList<Token> tokens = a.dump(input, "output.txt");

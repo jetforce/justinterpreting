@@ -4,10 +4,12 @@
 
 main() {
 	int i;
-	float f = 1.129e9;
+	float f;
+	f = 1.1299;
+	f = 1.12e-10;
 	
-	printf("%f\n", f);
-	printf("%d\n", lol);
+	printf("%f", f);
+	printf("%d", l);
 	
 	for(i = 0; i < 10; i++) {
 		printf("Hello World!");
@@ -20,8 +22,6 @@ main() {
 		
 		switch(i) {
 			case 1: 
-				//int k; 
-				//scanf("%d", &k); 
 				printf("Haha"); 
 			break;
 		}
