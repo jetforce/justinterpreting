@@ -186,7 +186,7 @@ public class Parser {
                 }
 
             }
-
+        
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }

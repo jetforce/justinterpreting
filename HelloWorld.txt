@@ -1,8 +1,17 @@
-#include<stdio.h>
+#include <stdio.h>
 main() {
 int i;
 for(i = 0; i < 10; i++) {
 printf("Hello World!");
+
+if(i < 5) {
+printf("Hehe");
+}
+
+switch(i) {
+case 1: printf("Haha"); break;
+}
+
 }
 printf("Bye World!");
 }

@@ -3724,3 +3724,23 @@ VAR, int, a, 10
 VAR, int, j, null
 VAR, int, i, 5
 ===
+VAR, int, i, 1
+===
+VAR, int, i, 2
+===
+VAR, int, i, 3
+===
+VAR, int, i, 4
+===
+VAR, int, i, 5
+===
+VAR, int, i, 6
+===
+VAR, int, i, 7
+===
+VAR, int, i, 8
+===
+VAR, int, i, 9
+===
+VAR, int, i, 10
+===
