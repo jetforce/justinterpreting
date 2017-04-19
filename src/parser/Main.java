@@ -19,7 +19,7 @@ public class Main {
         }*/
         System.out.println("---END PRINT---");
 
-        new GrammarLoader();
+        GrammarLoader.getInstance();
 
         sc.close();
 

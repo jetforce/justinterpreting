@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GrammarLoader {
-
+    
+    private static final GrammarLoader grammarLoader = new GrammarLoader();
+    
     private final String TOKEN_DIRECTIVE = "%token";
     private final String VAR_DIRECTIVE = "%var";
     private final String START_DIRECTIVE = "%start";
@@ -16,7 +18,7 @@ public class GrammarLoader {
 
     public NonTerminalModel startingSymbol;
 
-    public GrammarLoader() {
+    private GrammarLoader() {
 
         symbols = new HashMap<>();
         tokens = new HashMap<>();
@@ -25,7 +27,11 @@ public class GrammarLoader {
         startingSymbol = null;
 
     }
-
+    
+    public static GrammarLoader getInstance() {
+        return GrammarLoader.grammarLoader;
+    }
+    
     public GrammarModel generateGrammar(ArrayList<String> contents) {
 
         listTokens(contents.remove(0));
