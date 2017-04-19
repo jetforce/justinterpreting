@@ -31,7 +31,7 @@ public class ArithmeticCalculator {
     }
 
     public int evalInt(String equation) {
-        System.out.println("[int] evaluating " + equation);
+//        System.out.println("[int] evaluating " + equation);
         int result = 0;
         Object eval;
         try {
@@ -49,7 +49,7 @@ public class ArithmeticCalculator {
     }
 
     public float evalFloat(String equation) {
-        System.out.println("[float] evaluating " + equation);
+//        System.out.println("[float] evaluating " + equation);
         float result = 0;
         Object eval;
 
@@ -68,7 +68,7 @@ public class ArithmeticCalculator {
     }
 
     public boolean evalCond(String cond) {
-        System.out.println("[condition] evaluating " + cond);
+//        System.out.println("[condition] evaluating " + cond);
         boolean isTrue = true;
 
         try {

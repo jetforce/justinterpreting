@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 main(){
-int a = 1 + 2 + 4 / 2 + (4 + 10);
+int a = 7;
 float b = 3.5;
 a = a + 2;
 
@@ -9,7 +9,7 @@ a++;
 b++;
 printf("hello1weqweqwe3");
 
-int x = 10;
+int x = 1;
 int y;
 if(a > b && a > 0){
 	if(a + 3 < b){
