@@ -48,7 +48,7 @@ public class Interpreter {
         ArrayList<String> forBracket = new ArrayList<>();
         ArrayList<String> whileBracket = new ArrayList<>();
         ArrayList<String> switchBracket = new ArrayList<>();
-        ArrayList<String> printVars = new ArrayList<>();
+        ArrayList<String> ioVars = new ArrayList<>();
         int j, forIndex = 0, whileIndex = 0, forCtrIndex = 0;
 
         try {
@@ -139,24 +139,25 @@ public class Interpreter {
                     i += 2;
                     s = statements.get(i);
 
+                    //System.out.println("PRINT DIS: " + s);
                     val = s.split(",")[1].substring(1, s.split(",")[1].length() - 1);
                     i++;
                     s = statements.get(i);
-
+                    
                     //if there are values
                     if (s.contains("COMMA")) {
-                        printVars.clear();
+                        ioVars.clear();
                         while (!s.contains("CLOSEP")) {
                             i++;
                             s = statements.get(i);
 
                             if (s.contains("VAR")) {
-                                printVars.add(s.split(",")[1]);
+                                ioVars.add(s.split(",")[1]);
                             }
                         }
 
                         //   System.out.println("VAR TO PRINT = " + printVars.size());
-                        for (String v : printVars) {
+                        for (String v : ioVars) {
                             var = symbolTable.get(v);
 
                             if (var != null) {
@@ -174,7 +175,7 @@ public class Interpreter {
                     }
 
                     /* dont delete */
-                    System.out.print(val);
+                    System.out.println(val);
                 }
 
                 /* ===========================================================================
@@ -182,6 +183,7 @@ public class Interpreter {
                  ================================================ */
                 if (s.contains("SCANF")) {
 //                    System.out.println("SCANF S IS " + s);
+                    ioVars.clear();
                     //skip '('
                     i += 2;
                     s = statements.get(i);
@@ -193,9 +195,14 @@ public class Interpreter {
                     s = statements.get(i);
 //                    System.out.println("SCAANF: " + s);
                     //tempVal 
-                    if (val.equals("%d")) {
+                    while (!s.contains("CLOSEP")) {
+                            i++;
+                            s = statements.get(i);
 
-                    }
+                            if (s.contains("VAR")) {
+                                ioVars.add(s.split(",")[1]);
+                            }
+                        }
 //                    System.out.println(val);
                 }
 
