@@ -141,7 +141,7 @@ public class Analyzer {
             //Scanner s = new Scanner("(int)");
             Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens2.txt")));
+            a.loadCategories(new Scanner(new File("tokens5.txt")));
             a.loadRegex();
 
             a.dump(s, "output.txt");

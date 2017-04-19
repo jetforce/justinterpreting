@@ -2,7 +2,7 @@
 
 main(){
 int a = 1 + 2 + 4 / 2 + (4 + 10);
-float b = a;
+float b = 3.5;
 a = a + 2;
 
 a++;
@@ -31,7 +31,7 @@ for(i = 0; i < 5; i++){
 }
 
 printf("hello world!");
-printf("a is %d", a);
+printf("a and b are %d %f %d", a, b);
 switch(a - 6){
 	case 2: b = 3; break;
 	case 4: b = 5; 

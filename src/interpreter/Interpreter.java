@@ -134,11 +134,10 @@ public class Interpreter {
                                 System.out.println("ERROR: " + s.split(",")[1] + " is undefined.");
                             }
                         }
-                        
-                        
+                        val = val.replaceAll("%d", "undefined");
+                        val = val.replaceAll("%f", "undefined");
                     }
 
-                    System.out.println("PRINTF VAL: " + s);
                     /* dont delete */
                     System.out.println(val);
                 }
