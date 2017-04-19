@@ -5,6 +5,7 @@
  */
 package main;
 
+import interpreter.Interpreter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,28 +23,32 @@ import parser.TXTIO;
  * @author amcan
  */
 public class Main {
-    
+
     public static void main(String args[]) {
-        
+
         try {
             Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
             a.loadCategories(new Scanner(new File("tokens2.txt")));
             a.loadRegex();
-                
+
             ArrayList<Token> tokens = a.dump(s, "output.txt");
-            
+
             // PARSER
             String GRAMMAR_FILENAME = "cgrammar.txt";
-            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
-            
+            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);            
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
             System.out.println(grammar.toString());
+
             
+            // INTERPRETER
+            Interpreter i = new Interpreter();
+
+            i.interpret();
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
 }
