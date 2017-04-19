@@ -31,9 +31,10 @@ public class Parser {
     private final GrammarModel grammar;
     private final ArrayList<Token> tokens;
     private final Map tokenMap;
-    private final Map variableMap;
+    private Map variableMap;
 
-    private final ArrayList<TerminalModel> leafNodes;
+    private ArrayList<TerminalModel> leafNodes;
+    private int maxMatchTokenIndex;
 
     public Parser(GrammarModel grammar, ArrayList<Token> tokens, String StartingSymbol) {
 
@@ -43,13 +44,22 @@ public class Parser {
         this.variableMap = this.grammar.getVariables();
         this.leafNodes = new ArrayList<>();
         leafNodes.add(new TerminalModel(StartingSymbol));
+        
+        maxMatchTokenIndex = 0;
 
     }
 
     public boolean isTerminal(String key) {
         return this.tokenMap.containsKey(key);
     }
-
+    
+    private void setMaxMatchTokenIndex(int index) {
+        
+        if(index > maxMatchTokenIndex)
+            maxMatchTokenIndex = index;
+        
+    }
+    
     public boolean parse(int callNum, int matchTokenIndex, int leafNodeIndex) {
         /* REMOVED FOR DEMO
         System.out.println(callNum + " Call! " + matchTokenIndex + " " + leafNodeIndex);
@@ -85,6 +95,7 @@ public class Parser {
             //You found a terminal
             if (currentAlphabet.getName().equals(this.tokens.get(matchTokenIndex).getCategoryName())) {
                 //the stuff matches move on to the next
+                setMaxMatchTokenIndex(matchTokenIndex);
                 return parse(callNum + 1, matchTokenIndex + 1, leafNodeIndex + 1);
             } else {
                 //Back Track.
@@ -149,8 +160,18 @@ public class Parser {
 
         }
         this.leafNodes.add(leafNodeIndex, removedVariable);
-       // System.out.println(" this removed "+removedVariable.getName());
+        //System.out.println(" this removed "+removedVariable.getName());
         return false;
+    }
+    
+    public int getMaxMatchTokenIndex() {
+        return maxMatchTokenIndex;
+    }
+    
+    public void printMaxMatchTokenIndex() {
+        
+        System.out.println("maxMatchTokenIndex " + maxMatchTokenIndex);
+        
     }
 
     public static void main(String args[]) throws FileNotFoundException {

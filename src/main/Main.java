@@ -49,8 +49,9 @@ public class Main {
             Parser parser = new Parser(grammar, tokens, grammar.getStartingSymbol().getName());
             if(parser.parse(0, 0, 0))
                 System.out.println("Well-formed source code.");
-            else
-                System.out.println("Error in parsing.");
+            else{
+                System.out.println("ERROR IN " + tokens.get(parser.getMaxMatchTokenIndex()).getStatement());
+            }
             
             // INTERPRETER
             Interpreter i = new Interpreter();
