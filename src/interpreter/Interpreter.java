@@ -77,7 +77,7 @@ public class Interpreter {
                 }
 
                 if (insideWhile) {
-                    //System.out.println("WHILE: " + s + " " + whileBracket);
+                  //  System.out.println("WHILE: " + s + " " + whileBracket);
                     if (s.contains("OPENB")) {
                         whileBracket.add("{");
                     } else if (s.contains("CLOSEB")) {
@@ -88,7 +88,7 @@ public class Interpreter {
                 //loop
                 //System.out.println("1: " + insideFor + " 2: " + forBracket);
                 if (insideFor && forBracket.isEmpty()) {
-//                    System.out.println("jump!");
+                    System.out.println("jump!");
 
                     //update counter
                     i = forCtrIndex;
@@ -127,7 +127,7 @@ public class Interpreter {
 //                    System.out.println("MY S IS " + s);
                 }
 
-              //  System.out.println("1: " + insideWhile + "2: " + whileBracket);
+         //       System.out.println("1: " + insideWhile + "2: " + whileBracket);
                 if (insideWhile && whileBracket.isEmpty()) {
                     i = whileIndex;
                     s = statements.get(i);
@@ -557,6 +557,9 @@ public class Interpreter {
                         }
                         i++;
                         forBracket.add("{");
+                        if(insideWhile){
+                            whileBracket.add("{");
+                        }
                     }
                 }
 
@@ -610,6 +613,9 @@ public class Interpreter {
                         }
 
                         whileBracket.add("{");
+                        if(insideFor){
+                            forBracket.add("{");
+                        }
 
 //                        System.out.println("while: " + val + "?: " + calc.evalCond(val));
                         //if the condition is false, keep iterating until the else statement

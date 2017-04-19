@@ -27,7 +27,7 @@ public class Main {
 
     public static void main(String args[]) {
 
-        String INPUT_FILEPATH = "HelloWorld.c";
+        String INPUT_FILEPATH = "hello.c";
         File INPUT_FILE = new File(INPUT_FILEPATH);
 
         try {
