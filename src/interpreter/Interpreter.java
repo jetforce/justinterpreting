@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
  * @author Arces
  */
 public class Interpreter {
-
     private ArithmeticCalculator calc;
     private BufferedReader br;
     private Hashtable<String, Variable> symbolTable;
@@ -707,7 +706,7 @@ public class Interpreter {
         Variable var;
 //        System.out.println("=== DUMP ===");
         try {
-            out = new PrintWriter(new BufferedWriter(new FileWriter("Interpreter Dump.txt", true)));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("Interpreter Dump.dmp", true)));
             Set<String> keys = symbolTable.keySet();
             for (String key : keys) {
 //                System.out.println("[" + symbolTable.get(key).getType() + "] " + key + " = " + symbolTable.get(key).getValue());

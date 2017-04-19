@@ -55,6 +55,7 @@ public class Main {
                         " to " + tokens.get(parser.getMaxMatchTokenIndex()).getEndIndex());
             }
             
+            System.out.println("\n=============\n CONSOLE \n =================\n");
             // INTERPRETER
             Interpreter i = new Interpreter();
             i.interpret();
