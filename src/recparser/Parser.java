@@ -136,14 +136,14 @@ public class Parser {
     public static void main(String args[]) throws FileNotFoundException {
 
         try {
-            Scanner s = new Scanner("int*(int)");
-
+            Scanner input = new Scanner("int");
+            
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
             a.loadCategories(new Scanner(new File("tokens3.txt")));
             a.loadRegex();
 
-            ArrayList<Token> tokens = a.dump(s, "output.txt");
+            ArrayList<Token> tokens = a.dump(input, "output.txt");
 
             // PARSER
             String GRAMMAR_FILENAME = "cgrammar2.txt";
