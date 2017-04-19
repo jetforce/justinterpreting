@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  * @author Arces
  */
 public class Interpreter {
+
     private ArithmeticCalculator calc;
     private BufferedReader br;
     private Hashtable<String, Variable> symbolTable;
@@ -36,7 +37,7 @@ public class Interpreter {
         this.symbolTable = new Hashtable<>();
     }
 
-    public void interpret() {
+    public void interpret(String file) {
         Scanner sc = new Scanner(System.in);
         String s, tempVal, type = "", name, val, cond;
         Variable var, tempVar;
@@ -52,7 +53,7 @@ public class Interpreter {
         int j, forIndex = 0, whileIndex = 0, forCtrIndex = 0;
 
         try {
-            br = new BufferedReader(new FileReader(new File("output.txt")));
+            br = new BufferedReader(new FileReader(new File(file)));
 
             /* s -> statement */
             while ((s = br.readLine()) != null) {
@@ -64,7 +65,7 @@ public class Interpreter {
 
             for (int i = 0; i < statements.size(); i++) {
                 s = statements.get(i);
-                //         System.out.println("i = " + i + " s = " + s + " bracks = " + forBracket);
+//                         System.out.println("i = " + i + " s = " + s + " bracks = " + forBracket);
                 if (insideFor) {
                     if (s.contains("OPENB")) {
                         forBracket.add("{");
@@ -138,12 +139,13 @@ public class Interpreter {
                     //skip '('
                     i += 2;
                     s = statements.get(i);
-
+                    
+                    //unescape \n
                     //System.out.println("PRINT DIS: " + s);
                     val = s.split(",")[1].substring(1, s.split(",")[1].length() - 1);
                     i++;
                     s = statements.get(i);
-                    
+
                     //if there are values
                     if (s.contains("COMMA")) {
                         ioVars.clear();
@@ -196,13 +198,13 @@ public class Interpreter {
 //                    System.out.println("SCAANF: " + s);
                     //tempVal 
                     while (!s.contains("CLOSEP")) {
-                            i++;
-                            s = statements.get(i);
+                        i++;
+                        s = statements.get(i);
 
-                            if (s.contains("VAR")) {
-                                ioVars.add(s.split(",")[1]);
-                            }
+                        if (s.contains("VAR")) {
+                            ioVars.add(s.split(",")[1]);
                         }
+                    }
 //                    System.out.println(val);
                 }
 
@@ -533,6 +535,7 @@ public class Interpreter {
                  If a while is seen
                  ================================================ */
                 if (s.contains("WHILE")) {
+                    System.out.println("I AM WHILE");
                     val = "";
                     canPerform = true;
                     whileBracket.clear();
@@ -602,6 +605,7 @@ public class Interpreter {
                  If a switch is seen
                  ================================================ */
                 if (s.contains("SWITCH")) {
+                   // System.out.println("BRACKETS = " + forBracket);
                     val = "";
                     switchBracket.clear();
 
@@ -619,12 +623,12 @@ public class Interpreter {
                     s = statements.get(i);
 
                     switchBracket.add("{");
-                    if (insideFor) {
-                        forBracket.add("{");
-                    }
-                    if (insideWhile) {
-                        whileBracket.add("{");
-                    }
+                    //if (insideFor) {
+                   //     forBracket.add("{");
+                    //}
+                //   if (insideWhile) {
+                  //      whileBracket.add("{");
+                   // }
                     //case, default or equal brackets
                     //while end of switch is not seen, search for a case
 
@@ -658,7 +662,6 @@ public class Interpreter {
                                     cond = cond.replace(m.group(), tempVar.getValue().toString());
                                 } else {
                                     System.out.println("ERROR: " + m.group() + " is undefined.");
-                                    canPerform = false;
                                 }
                             }
                             if (calc.evalCond(cond)) {
@@ -669,10 +672,11 @@ public class Interpreter {
                     }
 
                     if (s.contains("DEFAULT")) {
-//                        System.out.println("I AM DEFAULT");
+                  //      System.out.println("I AM DEFAULT");
                         insideSwitch = false;
                     }
-//                    System.out.println("S IS = " + s);
+                //    System.out.println("S IS = " + s);
+                
                 }
 
                 /* ===========================================================================
@@ -696,7 +700,7 @@ public class Interpreter {
                 }
 
             }
-            Set<String> keys = symbolTable.keySet();
+            // Set<String> keys = symbolTable.keySet();
 //            System.out.println("==================\nVARIABLES IN TABLE\n==================");
 //            for (String key : keys) {
 //                System.out.println("[" + symbolTable.get(key).getType() + "] " + key + " = " + symbolTable.get(key).getValue());

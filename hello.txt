@@ -5,7 +5,6 @@ int a = 7;
 float b = 3.5;
 a = a + 2;
 
-a++;
 b++;
 printf("hello1weqweqwe3");
 

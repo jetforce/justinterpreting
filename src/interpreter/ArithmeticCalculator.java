@@ -68,7 +68,7 @@ public class ArithmeticCalculator {
     }
 
     public boolean evalCond(String cond) {
-//        System.out.println("[condition] evaluating " + cond);
+        //System.out.println("[condition] evaluating " + cond);
         boolean isTrue = true;
 
         try {

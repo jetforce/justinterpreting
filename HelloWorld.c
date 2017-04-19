@@ -31,7 +31,7 @@ main() {
 		}
 	}
 
-	while(i > 5 && i < 10) {
+	while(i > 4 && i < 10) {
 		scanf("%d", &i);
 		printf("%d\n", i);
 	}

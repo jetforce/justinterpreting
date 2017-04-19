@@ -58,7 +58,8 @@ public class Main {
             System.out.println("\n=============\n CONSOLE \n =================\n");
             // INTERPRETER
             Interpreter i = new Interpreter();
-            i.interpret();
+            String LEX_FILENAME = "HelloWorld.lex";
+            i.interpret(LEX_FILENAME);
             
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);

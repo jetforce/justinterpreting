@@ -52,7 +52,7 @@ CLOSEP,)
 OPENB,{
 PRINTF,printf
 OPENP,(
-STR,"Hello World!\n"
+STR,"Hello World!"
 CLOSEP,)
 SEMICOLON,;
 IF,if
@@ -75,7 +75,7 @@ CLOSEP,)
 SEMICOLON,;
 PRINTF,printf
 OPENP,(
-STR,"%d\n"
+STR,"%d"
 COMMA,,
 VAR,j
 CLOSEP,)
@@ -91,7 +91,7 @@ INT,1
 COLON,:
 PRINTF,printf
 OPENP,(
-STR,"Current integer is one\n"
+STR,"Current integer is one"
 CLOSEP,)
 SEMICOLON,;
 BREAK,break
@@ -101,7 +101,7 @@ INT,2
 COLON,:
 PRINTF,printf
 OPENP,(
-STR,"Current integer is two\n"
+STR,"Current integer is two"
 CLOSEP,)
 SEMICOLON,;
 BREAK,break
@@ -111,7 +111,7 @@ INT,3
 COLON,:
 PRINTF,printf
 OPENP,(
-STR,"Current integer is three\n"
+STR,"Current integer is three"
 CLOSEP,)
 SEMICOLON,;
 BREAK,break
@@ -120,7 +120,7 @@ DEFAULT,default
 COLON,:
 PRINTF,printf
 OPENP,(
-STR,"Current integer is either four or five\n"
+STR,"Current integer is either four or five"
 CLOSEP,)
 SEMICOLON,;
 CLOSEB,}
@@ -129,7 +129,7 @@ WHILE,while
 OPENP,(
 VAR,i
 CMORETHAN,>
-INT,4
+INT,5
 LAND,&&
 VAR,i
 CLESSTHAN,<
@@ -146,7 +146,7 @@ CLOSEP,)
 SEMICOLON,;
 PRINTF,printf
 OPENP,(
-STR,"%d\n"
+STR,"%d"
 COMMA,,
 VAR,i
 CLOSEP,)
@@ -154,7 +154,7 @@ SEMICOLON,;
 CLOSEB,}
 PRINTF,printf
 OPENP,(
-STR,"Bye World!\n"
+STR,"Bye World!"
 CLOSEP,)
 SEMICOLON,;
 CLOSEB,}
