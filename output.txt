@@ -54,6 +54,7 @@ PRINTF,printf
 OPENP,(
 STR,"Hello World!"
 CLOSEP,)
+SEMICOLON,;
 IF,if
 OPENP,(
 VAR,i

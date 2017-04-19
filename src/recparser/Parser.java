@@ -8,7 +8,6 @@ package recparser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -29,12 +28,12 @@ import parser.TerminalModel;
  */
 public class Parser {
 
-    private GrammarModel grammar;
-    private ArrayList<Token> tokens;
-    private Map tokenMap;
-    private Map variableMap;
+    private final GrammarModel grammar;
+    private final ArrayList<Token> tokens;
+    private final Map tokenMap;
+    private final Map variableMap;
 
-    private ArrayList<TerminalModel> leafNodes;
+    private final ArrayList<TerminalModel> leafNodes;
 
     public Parser(GrammarModel grammar, ArrayList<Token> tokens, String StartingSymbol) {
 
@@ -52,6 +51,7 @@ public class Parser {
     }
 
     public boolean parse(int callNum, int matchTokenIndex, int leafNodeIndex) {
+        /* REMOVED FOR DEMO
         System.out.println(callNum + " Call! " + matchTokenIndex + " " + leafNodeIndex);
         System.out.print("\t");
         int counting_num=0;
@@ -67,6 +67,7 @@ public class Parser {
         }
         System.out.println("");
         int numInsert;
+        */
         NonTerminalModel variable;
 
         //System.out.println("Checking Stop Condition " + tokens.size());
@@ -118,24 +119,28 @@ public class Parser {
                     return true;
                 } else {
                     //bro backtrack remove everything you have added.
-
+                    
+                    /* REMOVED FOR DEMO
                     System.out.println("CallNum " + callNum + " Removing Chars " + numInsertion);
                     System.out.print("\t");
                     for (TerminalModel tms : leafNodes) {
                         System.out.print(tms.getName() + " ");
                     }
                     System.out.println("");
-
+                    */
+                    
                     for (int j = 0; j < numInsertion; j++) {
                         this.leafNodes.remove(leafNodeIndex);
                     }
+                    
+                    /* REMOVED FOR DEMO
                     System.out.println("CallNum " + callNum + "After Removing Chars " + numInsertion);
                     System.out.print("\t");
                     for (TerminalModel tms : leafNodes) {
                         System.out.print(tms.getName() + " ");
                     }
                     System.out.println("");
-
+                    */
                     //return false;
                 }
                // this.leafNodes.add(leafNodeIndex, removedVariable);
@@ -144,7 +149,7 @@ public class Parser {
 
         }
         this.leafNodes.add(leafNodeIndex, removedVariable);
-        System.out.println(" this removed "+removedVariable.getName());
+       // System.out.println(" this removed "+removedVariable.getName());
         return false;
     }
 
@@ -153,7 +158,6 @@ public class Parser {
         try {
             Scanner input = new Scanner(new File("HelloWorld.txt"));
             
-            //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
             a.loadCategories(new Scanner(new File("tokens5.txt")));
             a.loadRegex();
@@ -177,7 +181,7 @@ public class Parser {
             boolean jet = parser.parse(0, 0, 0);
             
             System.out.println("DID YOU GENERATE IT? " + jet);
-            /*
+            /* REMOVED FOR DEMO
             for (String str : keys) {
                 model = (NonTerminalModel) m.get(str);
                 System.out.println("Model " + model.getName());
@@ -200,6 +204,5 @@ public class Parser {
         }
 
     }
-
     //a.dump(s, "output.txt");
 }

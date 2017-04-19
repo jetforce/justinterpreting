@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+main() {
+	float f;
+	f = 1.1299;
+
+	float g;
+	g = 1.12E10;
+	
+	printf("%f", f);
+	printf("%d", g);
+	
+	int i;
+	for(i = 0; i < 5; i++) {
+		printf("Hello World!");
+		
+		if(i < 2) {
+			int j;
+			scanf("%d", &j);
+			printf("%d", j);
+		}
+		
+		switch(i) {
+			case 1: printf("Current integer is one"); 
+			break;
+			case 2: printf("Current integer is two"); 
+			break;
+			case 3: printf("Current integer is three"); 
+			break;
+			default: printf("Current integer is either four or five");
+		}
+	}
+
+	while(i > 5 && i < 10) {
+		scanf("%d", &i);
+		printf("%d", i);
+	}
+
+	printf("Bye World!");
+}

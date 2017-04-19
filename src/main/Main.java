@@ -17,6 +17,7 @@ import lexer.Token;
 import parser.GrammarLoader;
 import parser.GrammarModel;
 import parser.TXTIO;
+import recparser.Parser;
 
 /**
  *
@@ -25,26 +26,36 @@ import parser.TXTIO;
 public class Main {
 
     public static void main(String args[]) {
-
+        
+        String INPUT_FILEPATH = "HelloWorld.c";
+        File INPUT_FILE = new File(INPUT_FILEPATH);
+        
         try {
-            Scanner s = new Scanner(new File("hello.txt"));
+            Scanner input = new Scanner(INPUT_FILE);
+            
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens2.txt")));
+            a.loadCategories(new Scanner(new File("tokens5.txt")));
             a.loadRegex();
-
-            ArrayList<Token> tokens = a.dump(s, "output.txt");
+            
+            System.out.println("GENERATING LEXEMES...");
+            ArrayList<Token> tokens = a.dump(input, INPUT_FILE.getName().split(".c")[0] + ".lex");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar.txt";
-            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);            
+            String GRAMMAR_FILENAME = "cgrammar5.txt";
+            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
-            System.out.println(grammar.toString());
-
+            
+            System.out.println("PARSING...");
+            Parser parser = new Parser(grammar, tokens, grammar.getStartingSymbol().getName());
+            if(parser.parse(0, 0, 0))
+                System.out.println("Well-formed source code.");
+            else
+                System.out.println("Error in parsing.");
             
             // INTERPRETER
             Interpreter i = new Interpreter();
-
             i.interpret();
+            
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }

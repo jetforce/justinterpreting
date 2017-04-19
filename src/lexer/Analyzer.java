@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 
 /**
@@ -53,6 +52,7 @@ public class Analyzer {
 
         String s[];
         Category cat;
+        
         while (input.hasNextLine()) {
 
             String line = input.nextLine();
@@ -73,7 +73,7 @@ public class Analyzer {
         }
         this.regex = new String(tokenPatternsBuffer.substring(1));
         this.pattern = Pattern.compile(this.regex);
-        System.out.println("Regex is: " + regex);
+        //System.out.println("Regex is: " + regex);
     }
 
     public Token nextToken(Scanner inputStream) {
@@ -115,7 +115,7 @@ public class Analyzer {
             out = new PrintWriter(f);
             while (token != null) {
                 out.println(token.getCategoryName() + "," + token.getStatement());
-                System.out.println(token.getCategoryName() + ">>" + token.getStatement());
+                //System.out.println(token.getCategoryName() + ">>" + token.getStatement());
 
                 tokens.add(token);
 
@@ -146,9 +146,7 @@ public class Analyzer {
 
             a.dump(s, "output.txt");
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalStateException ex) {
+        } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
