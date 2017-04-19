@@ -129,7 +129,6 @@ WHILE,while
 OPENP,(
 VAR,i
 CMORETHAN,>
-EQUALS,=
 INT,4
 LAND,&&
 VAR,i

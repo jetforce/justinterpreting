@@ -31,15 +31,17 @@ public class Interpreter {
     private ArithmeticCalculator calc;
     private BufferedReader br;
     private Hashtable<String, Variable> symbolTable;
+    private String file;
 
-    public Interpreter() {
+    public Interpreter(String file) {
+        this.file = file;
         this.calc = ArithmeticCalculator.getInstance();
         this.symbolTable = new Hashtable<>();
     }
 
-    public void interpret(String file) {
+    public void interpret() {
         Scanner sc = new Scanner(System.in);
-        String s, tempVal, type = "", name, val, cond;
+        String s, tempVal, type = "", name, val, cond, input;
         Variable var, tempVar;
         Pattern p = Pattern.compile("[a-z]");
         Matcher m;
@@ -65,7 +67,7 @@ public class Interpreter {
 
             for (int i = 0; i < statements.size(); i++) {
                 s = statements.get(i);
-//                         System.out.println("i = " + i + " s = " + s + " bracks = " + forBracket);
+          //                      System.out.println("i = " + i + " s = " + s + " bracks = " + whileBracket);
                 if (insideFor) {
                     if (s.contains("OPENB")) {
                         forBracket.add("{");
@@ -74,14 +76,14 @@ public class Interpreter {
                     }
                 }
 
-//                if (insideWhile) {
-                //                  //System.out.println("WHILE: " + s + " " + whileBracket);
-                //                if (s.contains("OPENB")) {
-                //                  whileBracket.add("{");
-                //            } else if (s.contains("CLOSEB")) {
-                //              //whileBracket.remove(whileBracket.size() - 1);
-                //        }
-                //  }
+                if (insideWhile) {
+                    //System.out.println("WHILE: " + s + " " + whileBracket);
+                    if (s.contains("OPENB")) {
+                        whileBracket.add("{");
+                    } else if (s.contains("CLOSEB")) {
+                        whileBracket.remove(whileBracket.size() - 1);
+                    }
+                }
                 //System.out.println("loop = " + loopBracket);
                 //loop
                 //System.out.println("1: " + insideFor + " 2: " + forBracket);
@@ -125,6 +127,7 @@ public class Interpreter {
 //                    System.out.println("MY S IS " + s);
                 }
 
+              //  System.out.println("1: " + insideWhile + "2: " + whileBracket);
                 if (insideWhile && whileBracket.isEmpty()) {
                     i = whileIndex;
                     s = statements.get(i);
@@ -132,14 +135,14 @@ public class Interpreter {
 
                 // System.out.println(line);
                 /* ===========================================================================
-                 If a printf is seen WIP
+                 If a printf is seen
                  ================================================ */
                 if (s.contains("PRINTF")) {
                     //                   System.out.println("PRINTF S IS " + s);
                     //skip '('
                     i += 2;
                     s = statements.get(i);
-                    
+
                     //unescape \n
                     //System.out.println("PRINT DIS: " + s);
                     val = s.split(",")[1].substring(1, s.split(",")[1].length() - 1);
@@ -185,24 +188,50 @@ public class Interpreter {
                  ================================================ */
                 if (s.contains("SCANF")) {
 //                    System.out.println("SCANF S IS " + s);
-                    ioVars.clear();
                     //skip '('
                     i += 2;
                     s = statements.get(i);
 
                     val = s.split(",")[1].substring(1, s.split(",")[1].length() - 1);
-
-                    //skip ',' get variable
                     i++;
                     s = statements.get(i);
-//                    System.out.println("SCAANF: " + s);
-                    //tempVal 
-                    while (!s.contains("CLOSEP")) {
-                        i++;
-                        s = statements.get(i);
+                    //if there are values
+                    if (s.contains("COMMA")) {
+                        ioVars.clear();
+                        while (!s.contains("CLOSEP")) {
+                            i++;
+                            s = statements.get(i);
 
-                        if (s.contains("VAR")) {
-                            ioVars.add(s.split(",")[1]);
+                            if (s.contains("AMPERSAND")) {
+                                i++;
+                                s = statements.get(i);
+                                ioVars.add(s.split(",")[1]);
+                            } else if (s.contains("VAR")) {
+                                System.out.println("Error: Missing Ampersand");
+                            }
+                        }
+
+                        //   System.out.println("VAR TO PRINT = " + printVars.size());
+                        for (String v : ioVars) {
+                            var = symbolTable.get(v);
+
+                       //     System.out.println("v = " + v + " : " + var.getType());
+                            tempVal = val.substring(val.indexOf("%"), val.indexOf("%") + 2);
+                            //if the input is an int
+                            if (tempVal.equals("%d") && var.getType().equals("int")) {
+                                input = Integer.toString(sc.nextInt());
+
+                                var.setValue(Integer.parseInt(input));
+                                symbolTable.put(v, var);
+                                dumpUpdate();
+                            } else if (tempVal.equals("%f") && var.getType().equals("float")) {
+                                input = Float.toString(sc.nextFloat());
+
+                                var.setValue(Float.parseFloat(input));
+                                symbolTable.put(v, var);
+                                dumpUpdate();
+                            }
+                            val = val.replaceFirst(tempVal, "");
                         }
                     }
 //                    System.out.println(val);
@@ -535,7 +564,7 @@ public class Interpreter {
                  If a while is seen
                  ================================================ */
                 if (s.contains("WHILE")) {
-                    System.out.println("I AM WHILE");
+                  //  System.out.println("I AM WHILE");
                     val = "";
                     canPerform = true;
                     whileBracket.clear();
@@ -605,7 +634,7 @@ public class Interpreter {
                  If a switch is seen
                  ================================================ */
                 if (s.contains("SWITCH")) {
-                   // System.out.println("BRACKETS = " + forBracket);
+                    // System.out.println("BRACKETS = " + forBracket);
                     val = "";
                     switchBracket.clear();
 
@@ -624,11 +653,11 @@ public class Interpreter {
 
                     switchBracket.add("{");
                     //if (insideFor) {
-                   //     forBracket.add("{");
+                    //     forBracket.add("{");
                     //}
-                //   if (insideWhile) {
-                  //      whileBracket.add("{");
-                   // }
+                    //   if (insideWhile) {
+                    //      whileBracket.add("{");
+                    // }
                     //case, default or equal brackets
                     //while end of switch is not seen, search for a case
 
@@ -672,11 +701,11 @@ public class Interpreter {
                     }
 
                     if (s.contains("DEFAULT")) {
-                  //      System.out.println("I AM DEFAULT");
+                        //      System.out.println("I AM DEFAULT");
                         insideSwitch = false;
                     }
-                //    System.out.println("S IS = " + s);
-                
+                    //    System.out.println("S IS = " + s);
+
                 }
 
                 /* ===========================================================================
@@ -717,7 +746,7 @@ public class Interpreter {
         Variable var;
 //        System.out.println("=== DUMP ===");
         try {
-            out = new PrintWriter(new BufferedWriter(new FileWriter("Interpreter Dump.dmp", true)));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(file.substring(0, file.indexOf(".lex")) + ".dmp", true)));
             Set<String> keys = symbolTable.keySet();
             for (String key : keys) {
 //                System.out.println("[" + symbolTable.get(key).getType() + "] " + key + " = " + symbolTable.get(key).getValue());

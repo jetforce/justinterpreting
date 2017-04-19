@@ -52,9 +52,9 @@ public class Main {
                 System.out.println("\n=============\n CONSOLE \n =================\n");
 
                 // INTERPRETER
-                Interpreter i = new Interpreter();
-                String LEX_FILENAME = "HelloWorld.lex";
-                i.interpret(LEX_FILENAME);
+                String LEX_FILENAME = INPUT_FILE.getName().split(".c")[0] + ".lex";
+                Interpreter i = new Interpreter(LEX_FILENAME);
+                i.interpret();
             } else {
                 System.out.println("\n=============\n CONSOLE \n =================\n");
 
