@@ -5,11 +5,13 @@ for(i = 0; i < 10; i++) {
 printf("Hello World!");
 
 if(i < 5) {
-printf("Hehe");
+int j;
+scanf("%d", &j);
+printf("%d", j);
 }
 
 switch(i) {
-case 1: printf("Haha"); break;
+case 1: int k; scanf("%d", &k); printf("Haha"); break;
 }
 
 }

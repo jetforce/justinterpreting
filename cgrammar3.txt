@@ -37,7 +37,7 @@ ifelse: IF OPENP cond CLOSEP OPENB statement CLOSEB else
 
 else: E | ELSE OPENB statement CLOSEB
 
-break: E | BREAK
+break: E | BREAK SEMICOLON
 
 case: E | CASE INT COLON break statement break
 
