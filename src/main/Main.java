@@ -41,7 +41,7 @@ public class Main {
             ArrayList<Token> tokens = a.dump(input, INPUT_FILE.getName().split(".c")[0] + ".lex");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar5.txt";
+            String GRAMMAR_FILENAME = "cgrammar6.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
 

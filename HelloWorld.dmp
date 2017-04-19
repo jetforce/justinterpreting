@@ -938,3 +938,273 @@ VAR, int, i, 10
 VAR, float, g, 1.12E10
 VAR, float, f, 1.13
 ===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 2
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 4
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 10
+VAR, int, i, 10
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 2
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 4
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 2
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 4
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 1
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 2
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 4
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 7
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 6
+VAR, int, i, 20
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 0
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 2
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 3
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 4
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 5
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===
+VAR, int, j, 5
+VAR, int, i, 1
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===

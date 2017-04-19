@@ -14,7 +14,7 @@ main() {
 	for(i = 0; i < 5; i++) {
 		printf("Hello World!\n");
 		
-		if(i < 2) {
+		if(i + 1 < 2) {
 			int j;
 			scanf("%d", &j);
 			printf("%d\n", j);
