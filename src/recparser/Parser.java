@@ -155,13 +155,13 @@ public class Parser {
             
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens2.txt")));
+            a.loadCategories(new Scanner(new File("tokens4.txt")));
             a.loadRegex();
 
             ArrayList<Token> tokens = a.dump(input, "output.txt");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar3.txt";
+            String GRAMMAR_FILENAME = "cgrammar4.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
