@@ -30,5 +30,11 @@ main() {
 			default: printf("Current integer is either four or five");
 		}
 	}
+
+	while(i > 5 && i < 10) {
+		scanf("%d", &i);
+		printf("%d", i);
+	}
+
 	printf("Bye World!");
 }
