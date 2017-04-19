@@ -36,9 +36,8 @@ public class Main {
 
             // PARSER
             String GRAMMAR_FILENAME = "cgrammar.txt";
-            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
-
-            GrammarModel grammar = new GrammarLoader().generateGrammar(contents);
+            ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);            
+            GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
             System.out.println(grammar.toString());
 
             

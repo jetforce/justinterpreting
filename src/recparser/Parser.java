@@ -91,10 +91,17 @@ public class Parser {
             removedVariable = this.leafNodes.remove(leafNodeIndex);
             variable = (NonTerminalModel) variableMap.get(removedVariable.getName());
             ArrayList<ProductionModel> pm = variable.getProductions();
-
+            //if you are epsilon
+            
+            
             while (productionIndex < pm.size()) {
                 numInsertion = pm.get(productionIndex).getSymbols().size();
-
+                //If epsilon
+                if(numInsertion==1 && pm.get(productionIndex).getSymbols().get(0).getName().equals("E")){
+                    numInsertion = 0;
+                }
+                
+                
                 for (int i = 0; i < numInsertion; i++) {
                     this.leafNodes.add(i + leafNodeIndex, pm.get(productionIndex).getSymbols().get(i));
                 }
@@ -136,20 +143,20 @@ public class Parser {
     public static void main(String args[]) throws FileNotFoundException {
 
         try {
-            Scanner input = new Scanner("(int) + (int)");
+            Scanner input = new Scanner(new File("HelloWorld.txt"));
             
             //Scanner s = new Scanner(new File("hello.txt"));
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens3.txt")));
+            a.loadCategories(new Scanner(new File("tokens2.txt")));
             a.loadRegex();
 
             ArrayList<Token> tokens = a.dump(input, "output.txt");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar2.txt";
+            String GRAMMAR_FILENAME = "cgrammar.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
-            GrammarModel grammar = new GrammarLoader().generateGrammar(contents);
+            GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);
             
             Map m = grammar.getVariables();
             Set<String> keys = m.keySet();
