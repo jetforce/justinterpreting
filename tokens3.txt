@@ -1,3 +1,4 @@
+[ \t\f\r\n]	WHITESPACE
 int	int
 [+]	ADD
 [*]	MULT

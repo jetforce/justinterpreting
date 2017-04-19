@@ -24,7 +24,7 @@ public class Analyzer {
 
     public ArrayList<Category> categories;
     public HashMap mapCategories;
-    
+
     private String regex;
     private Pattern pattern;
 
@@ -44,31 +44,28 @@ public class Analyzer {
         categories.add(new Category("NUMBER", "-?[0-9]+"));
         categories.add(new Category("BINARYOP", "[*|/|+|-]"));
         categories.add(new Category("WHITESPACE", "[ \t\f\r\n]+"));
-        
 
         //Always Add Error
         categories.add(new Category("ERROR", ".+"));
     }
 
     public void loadCategories(Scanner input) {
-        
-        
+
         String s[];
-        Category cat;      
+        Category cat;
         while (input.hasNextLine()) {
-  
+
             String line = input.nextLine();
             s = line.split("\\t");
-            cat = new Category(s[1],s[0]);
+            cat = new Category(s[1], s[0]);
             categories.add(cat);
             mapCategories.put(s[1], cat);
-            
+
         }
         input.close();
-           
+
         categories.add(new Category("ERROR", ".+"));
-        
-        
+
     }
 
     public void loadRegex() {
@@ -95,19 +92,23 @@ public class Analyzer {
         for (int i = 0; i < this.categories.size(); i++) {
             if (inputStream.match().group(i + 1) != null) {
 
-                token = new Token(foundMatch, this.categories.get(i), inputStream.match().start(),inputStream.match().end());
+                token = new Token(foundMatch, this.categories.get(i), inputStream.match().start(), inputStream.match().end());
                 break;
             }
 
         }
 
+        if(token.getCategoryName().equals("WHITESPACE")){
+            return nextToken(inputStream);
+        }
+        
         return token;
     }
 
     public ArrayList<Token> dump(Scanner inputStream, String filename) {
-        
+
         ArrayList<Token> tokens = new ArrayList<>();
-        
+
         Token token = nextToken(inputStream);
         File f = new File(filename);
         PrintWriter out = null;
@@ -117,8 +118,9 @@ public class Analyzer {
             while (token != null) {
                 out.println(token.getCategoryName() + "," + token.getStatement());
                 System.out.println(token.getCategoryName() + ">>" + token.getStatement());
-                
+
                 tokens.add(token);
+
                 token = nextToken(inputStream);
             }
         } catch (FileNotFoundException ex) {
@@ -126,15 +128,15 @@ public class Analyzer {
         }
 
         out.close();
-        
+
         return tokens;
-        
+
     }
 
-    public HashMap getCategories(){
+    public HashMap getCategories() {
         return this.mapCategories;
     }
-     
+
     public static void main(String args[]) {
 
         try {
@@ -143,7 +145,7 @@ public class Analyzer {
             Analyzer a = Analyzer.getInstance();
             a.loadCategories(new Scanner(new File("tokens3.txt")));
             a.loadRegex();
-                
+
             a.dump(s, "output.txt");
 
         } catch (FileNotFoundException ex) {
