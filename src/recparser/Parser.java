@@ -54,8 +54,16 @@ public class Parser {
     public boolean parse(int callNum, int matchTokenIndex, int leafNodeIndex) {
         System.out.println(callNum + " Call! " + matchTokenIndex + " " + leafNodeIndex);
         System.out.print("\t");
+        int counting_num=0;
         for (TerminalModel tms : leafNodes) {
+            
+            if(counting_num== leafNodeIndex){
+                 System.out.print(" ["+ tms.getName() + "] ");
+            }else
+            
             System.out.print(tms.getName() + " ");
+            
+            counting_num++;
         }
         System.out.println("");
         int numInsert;
@@ -169,7 +177,7 @@ public class Parser {
             boolean jet = parser.parse(0, 0, 0);
             
             System.out.println("DID YOU GENERATE IT? " + jet);
-
+            /*
             for (String str : keys) {
                 model = (NonTerminalModel) m.get(str);
                 System.out.println("Model " + model.getName());
@@ -186,7 +194,7 @@ public class Parser {
                 }
 
             }
-        
+            */
         } catch (FileNotFoundException | IllegalStateException ex) {
             Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
         }
