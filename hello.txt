@@ -8,33 +8,30 @@ a = a + 2;
 a++;
 b++;
 printf("hello1weqweqwe3");
-123 "hello123 wrwe"
 
-if(a > b){
-	if(a + 3 > b){
+int x = 10;
+int y;
+if(a > b && a > 0){
+	if(a + 3 < b){
 		b = a * b;
 	} else{
-		a = a + 4;	
+		while(x > 0){
+			for(y = 0; y < 5; y++){
+				a = a + 10;
+			}
+			x--;
+		}	
 	}
 } else{
 	a = (a + 3 + 14) / b;
 }
 int i;
-a = 0;
 for(i = 0; i < 5; i++){
 	a = a + 2;
 }
 
 printf("hello world!");
-
-int x = 10;
-
-while(x > 0){
-	a = a + 2;
-
-	x--;
-}
-
+printf("a is %d", a);
 switch(a - 6){
 	case 2: b = 3; break;
 	case 4: b = 5; 

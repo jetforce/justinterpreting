@@ -49,6 +49,7 @@ public class Interpreter {
         ArrayList<String> forBracket = new ArrayList<>();
         ArrayList<String> whileBracket = new ArrayList<>();
         ArrayList<String> switchBracket = new ArrayList<>();
+        ArrayList<String> printVars = new ArrayList<>();
         int j, forIndex = 0, whileIndex = 0;
 
         try {
@@ -71,9 +72,9 @@ public class Interpreter {
                         forBracket.remove(forBracket.size() - 1);
                     }
                 }
-                
+
                 if (insideWhile) {
-                    System.out.println("WHILE: " + s + " " + whileBracket);
+                    //System.out.println("WHILE: " + s + " " + whileBracket);
                     if (s.contains("OPENB")) {
                         whileBracket.add("{");
                     } else if (s.contains("CLOSEB")) {
@@ -86,7 +87,7 @@ public class Interpreter {
                     i = forIndex;
                     s = statements.get(i);
                 }
-                
+
                 if (insideWhile && whileBracket.isEmpty()) {
                     i = whileIndex;
                     s = statements.get(i);
@@ -97,13 +98,47 @@ public class Interpreter {
                  If a printf is seen WIP
                  ================================================ */
                 if (s.contains("PRINTF")) {
-                    System.out.println("PRINTF S IS " + s);
+                    //                   System.out.println("PRINTF S IS " + s);
                     //skip '('
                     i += 2;
                     s = statements.get(i);
 
                     val = s.split(",")[1].substring(1, s.split(",")[1].length() - 1);
 
+                    i++;
+                    s = statements.get(i);
+
+                    //if there are values
+                    if (s.contains("COMMA")) {
+                        printVars.clear();
+                        while (!s.contains("CLOSEP")) {
+                            i++;
+                            s = statements.get(i);
+
+                            if (s.contains("VAR")) {
+                                printVars.add(s.split(",")[1]);
+                            }
+                        }
+
+                        System.out.println("VAR TO PRINT = " + printVars.size());
+                        for (String v : printVars) {
+                            var = symbolTable.get(v);
+
+                            if (var != null) {
+                                if(var.getType().equals("int")){
+                                    val = val.replaceFirst("%d", (var.getValue() != null ? var.getValue().toString() : "undefined"));
+                                } else if(var.getType().equals("float")){
+                                    val = val.replaceFirst("%f", (var.getValue() != null ? var.getValue().toString() : "undefined"));
+                                }
+                            } else {
+                                System.out.println("ERROR: " + s.split(",")[1] + " is undefined.");
+                            }
+                        }
+                        
+                        
+                    }
+
+                    System.out.println("PRINTF VAL: " + s);
                     /* dont delete */
                     System.out.println(val);
                 }
@@ -469,9 +504,9 @@ public class Interpreter {
                     if (!insideWhile) {
                         insideWhile = true;
                         whileIndex = i;
-                        
+
                     }
-                    
+
                     //get condition inside ()
                     i++;
                     s = statements.get(i);
@@ -479,7 +514,6 @@ public class Interpreter {
 
                     tempVal = statements.get(j);
                     while (!tempVal.contains("CLOSEP") && j < statements.size()) {
-                        System.out.println("while temp = " + tempVal);
                         val += tempVal.split(",")[1];
                         j++;
                         tempVal = statements.get(j);
@@ -508,7 +542,7 @@ public class Interpreter {
                         }
 
                         whileBracket.add("{");
-                        
+
                         System.out.println("while: " + val + "?: " + calc.evalCond(val));
                         //if the condition is false, keep iterating until the else statement
                         if (!calc.evalCond(val)) {
