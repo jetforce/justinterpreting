@@ -161,7 +161,7 @@ public class Parser {
             ArrayList<Token> tokens = a.dump(input, "output.txt");
 
             // PARSER
-            String GRAMMAR_FILENAME = "cgrammar4.txt";
+            String GRAMMAR_FILENAME = "cgrammar5.txt";
             ArrayList<String> contents = TXTIO.read(GRAMMAR_FILENAME);
 
             GrammarModel grammar = GrammarLoader.getInstance().generateGrammar(contents);

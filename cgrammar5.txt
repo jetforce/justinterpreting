@@ -43,7 +43,7 @@ else: E | ELSE OPENB statement CLOSEB
 
 break: E | BREAK SEMICOLON
 
-case: E | CASE nums COLON break statement break
+case: E | CASE nums COLON break statement break case
 
 switch: SWITCH OPENP VAR CLOSEP OPENB CASE nums COLON break statement break case CLOSEB | SWITCH OPENP VAR CLOSEP OPENB CASE nums COLON break statement break case DEFAULT COLON statement CLOSEB
 
