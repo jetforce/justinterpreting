@@ -50,7 +50,9 @@ public class Main {
             if(parser.parse(0, 0, 0))
                 System.out.println("Well-formed source code.");
             else{
-                System.out.println("ERROR IN " + tokens.get(parser.getMaxMatchTokenIndex()).getStatement());
+                System.out.println("ERROR IN " + tokens.get(parser.getMaxMatchTokenIndex()).getStatement() + 
+                        " " + tokens.get(parser.getMaxMatchTokenIndex()).getStartIndex() + 
+                        " to " + tokens.get(parser.getMaxMatchTokenIndex()).getEndIndex());
             }
             
             // INTERPRETER

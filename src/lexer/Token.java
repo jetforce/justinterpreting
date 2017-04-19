@@ -30,4 +30,12 @@ public class Token {
         return this.category.getName();
     }
     
+    public int getStartIndex() {
+        return startIndex;
+    }
+    
+    public int getEndIndex() {
+        return endIndex;
+    }
+    
 }
