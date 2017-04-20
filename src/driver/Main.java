@@ -13,8 +13,8 @@ import interpreter.Interpreter;
  */
 public class Main {
     public static void main(String args[]){
-        Interpreter i = new Interpreter();
+        //Interpreter i = new Interpreter();
         
-        i.interpret();
+        //i.interpret();
     }
 }
