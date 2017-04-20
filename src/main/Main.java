@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lexer.Analyzer;
+import lexer.Category;
 import lexer.Token;
 import parser.GrammarLoader;
 import parser.GrammarModel;
@@ -34,7 +35,7 @@ public class Main {
             Scanner input = new Scanner(INPUT_FILE);
 
             Analyzer a = Analyzer.getInstance();
-            a.loadCategories(new Scanner(new File("tokens5.txt")));
+            a.loadCategories(new Scanner(new File("tokens6.txt")));
             a.loadRegex();
 
             System.out.println("GENERATING LEXEMES...");
@@ -57,10 +58,16 @@ public class Main {
                 i.interpret();
             } else {
                 System.out.println("\n=============\n CONSOLE \n =================\n");
-
-                System.out.println("ERROR IN " + tokens.get(parser.getMaxMatchTokenIndex()).getStatement()
-                        + " " + tokens.get(parser.getMaxMatchTokenIndex()).getStartIndex()
-                        + " to " + tokens.get(parser.getMaxMatchTokenIndex()).getEndIndex());
+                
+                Token error = tokens.get(parser.getMaxMatchTokenIndex());
+                System.out.println("Line [" + error.getLineNumber() + "]" + " ERROR AFTER " + error.getStatement());
+                //System.out.println(parser.getExpectedSymbol().getName());
+                Category cat = (Category)a.getCategories().get(parser.getExpectedSymbol().getName());
+                if(cat != null)
+                    System.out.println(cat.getString() + " expected");
+                else
+                    System.out.println("Error in Line [" + (error.getLineNumber() + 1) + "]" );
+                
             }
 
         } catch (FileNotFoundException | IllegalStateException ex) {

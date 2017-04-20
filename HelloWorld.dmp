@@ -1208,3 +1208,8 @@ VAR, int, i, 1
 VAR, float, g, 1.12E10
 VAR, float, f, 1.13
 ===
+VAR, float, f, 1.13
+===
+VAR, float, g, 1.12E10
+VAR, float, f, 1.13
+===

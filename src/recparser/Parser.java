@@ -35,6 +35,7 @@ public class Parser {
 
     private ArrayList<TerminalModel> leafNodes;
     private int maxMatchTokenIndex;
+    private TerminalModel expectedSymbol;
 
     public Parser(GrammarModel grammar, ArrayList<Token> tokens, String StartingSymbol) {
 
@@ -46,6 +47,7 @@ public class Parser {
         leafNodes.add(new TerminalModel(StartingSymbol));
         
         maxMatchTokenIndex = 0;
+        expectedSymbol = null;
 
     }
 
@@ -55,8 +57,18 @@ public class Parser {
     
     private void setMaxMatchTokenIndex(int index) {
         
-        if(index > maxMatchTokenIndex)
+        if(index > maxMatchTokenIndex) {
             maxMatchTokenIndex = index;
+            
+            //for(TerminalModel terminal : leafNodes)
+            //    System.out.println(terminal.getName());
+            
+            //System.out.println("---");
+            if(index + 1 < leafNodes.size())
+                expectedSymbol = leafNodes.get(index + 1);
+            //System.out.println(leafNodes.get(index).getName());
+            
+        }
         
     }
     
@@ -166,6 +178,10 @@ public class Parser {
     
     public int getMaxMatchTokenIndex() {
         return maxMatchTokenIndex;
+    }
+    
+    public TerminalModel getExpectedSymbol() {
+        return expectedSymbol;
     }
     
     public void printMaxMatchTokenIndex() {

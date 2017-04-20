@@ -14,12 +14,14 @@ public class Token {
     private String statement;
     private Category category;
     private int startIndex, endIndex;
+    private int lineNumber;
     
-    public Token(String statement, Category category, int start, int end){
+    public Token(String statement, Category category, int start, int end, int lineNumber){
         this.statement = statement;
         this.category = category;
         startIndex = start;
         endIndex = end;
+        this.lineNumber = lineNumber;
     }
     
     public String getStatement(){
@@ -36,6 +38,10 @@ public class Token {
     
     public int getEndIndex() {
         return endIndex;
+    }
+    
+    public int getLineNumber() {
+        return lineNumber;
     }
     
 }
