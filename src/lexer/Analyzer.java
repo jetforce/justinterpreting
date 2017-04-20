@@ -27,7 +27,9 @@ public class Analyzer {
 
     private String regex;
     private Pattern pattern;
-
+    
+    private int currentLine;
+    
     public static Analyzer analyzer = new Analyzer();
 
     public static Analyzer getInstance() {
@@ -37,6 +39,7 @@ public class Analyzer {
     public Analyzer() {
         categories = new ArrayList<>();
         mapCategories = new HashMap<>();
+        currentLine = 1;
         //categories.add(new Category("EOF","\\z"));
     }
     /*
@@ -91,13 +94,18 @@ public class Analyzer {
         for (int i = 0; i < this.categories.size(); i++) {
             if (inputStream.match().group(i + 1) != null) {
 
-                token = new Token(foundMatch, this.categories.get(i), inputStream.match().start(), inputStream.match().end());
+                token = new Token(foundMatch, this.categories.get(i), inputStream.match().start(), inputStream.match().end(), currentLine);
                 break;
             }
 
         }
 
         if(token.getCategoryName().equals("WHITESPACE")){
+            
+            if(token.getStatement().equals("\n")) {
+                currentLine++;
+            }
+            
             return nextToken(inputStream);
         }
         

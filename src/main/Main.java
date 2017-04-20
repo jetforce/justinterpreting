@@ -58,12 +58,15 @@ public class Main {
                 i.interpret();
             } else {
                 System.out.println("\n=============\n CONSOLE \n =================\n");
-
-                System.out.println("ERROR AFTER " + tokens.get(parser.getMaxMatchTokenIndex()).getStatement());
+                
+                Token error = tokens.get(parser.getMaxMatchTokenIndex());
+                System.out.println("Line [" + error.getLineNumber() + "]" + " ERROR AFTER " + error.getStatement());
                 //System.out.println(parser.getExpectedSymbol().getName());
                 Category cat = (Category)a.getCategories().get(parser.getExpectedSymbol().getName());
                 if(cat != null)
                     System.out.println(cat.getString() + " expected");
+                else
+                    System.out.println("Error in Line [" + (error.getLineNumber() + 1) + "]" );
                 
             }
 

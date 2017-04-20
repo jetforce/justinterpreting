@@ -7,7 +7,7 @@ main(){
 	printf("a is %d\n", a);
 	a = a + 2;
 	printf("a is %d\n", a);
-	 = 3.5;
+	b = 3.5;
 	a++;
 	printf("a is %d\n", a);
 	b++;
