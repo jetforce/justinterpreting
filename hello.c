@@ -49,4 +49,6 @@ main(){
 		case 8: b = 9; break;
 		default: b = a / 3;
 	}
+	
+	printf("b is %f", b);
 }

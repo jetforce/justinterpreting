@@ -88,7 +88,7 @@ public class Interpreter {
                 //loop
                 //System.out.println("1: " + insideFor + " 2: " + forBracket);
                 if (insideFor && forBracket.isEmpty()) {
-                    System.out.println("jump!");
+              //      System.out.println("jump!");
 
                     //update counter
                     i = forCtrIndex;

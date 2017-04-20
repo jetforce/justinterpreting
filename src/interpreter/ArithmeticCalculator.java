@@ -68,7 +68,7 @@ public class ArithmeticCalculator {
     }
 
     public boolean evalCond(String cond) {
-        System.out.println("[condition] evaluating " + cond);
+      //  System.out.println("[condition] evaluating " + cond);
         boolean isTrue = true;
 
         try {
@@ -77,7 +77,7 @@ public class ArithmeticCalculator {
         } catch (ScriptException ex) {
             Logger.getLogger(ArithmeticCalculator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("result: " + isTrue);
+      //  System.out.println("result: " + isTrue);
         return isTrue;
     }
 }
