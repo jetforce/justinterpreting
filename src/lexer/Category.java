@@ -13,10 +13,12 @@ public class Category {
     
     private String name;
     private String pattern;
+    private String string;
     
-    public Category(String name, String pattern){
+    public Category(String name, String pattern, String string){
         this.name =  name;
         this.pattern = pattern;
+        this.string = string;
     }
     
     public String getName(){
@@ -25,6 +27,10 @@ public class Category {
     
     public String getPattern(){
         return this.pattern;
+    }
+    
+    public String getString() {
+        return string;
     }
     
     

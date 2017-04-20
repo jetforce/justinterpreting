@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 public class Analyzer {
 
     public ArrayList<Category> categories;
-    public HashMap mapCategories;
+    public Map<String, Category> mapCategories;
 
     private String regex;
     private Pattern pattern;
@@ -35,10 +36,10 @@ public class Analyzer {
 
     public Analyzer() {
         categories = new ArrayList<>();
-        mapCategories = new HashMap();
+        mapCategories = new HashMap<>();
         //categories.add(new Category("EOF","\\z"));
     }
-
+    /*
     public void loadCategories() {
         categories.add(new Category("NUMBER", "-?[0-9]+"));
         categories.add(new Category("BINARYOP", "[*|/|+|-]"));
@@ -47,7 +48,7 @@ public class Analyzer {
         //Always Add Error
         categories.add(new Category("ERROR", ".+"));
     }
-
+    */
     public void loadCategories(Scanner input) {
 
         String s[];
@@ -57,7 +58,7 @@ public class Analyzer {
 
             String line = input.nextLine();
             s = line.split("\\t");
-            cat = new Category(s[1], s[0]);
+            cat = new Category(s[1], s[0], s[2]);
             categories.add(cat);
             mapCategories.put(s[1], cat);
 
@@ -131,7 +132,7 @@ public class Analyzer {
 
     }
 
-    public HashMap getCategories() {
+    public Map getCategories() {
         return this.mapCategories;
     }
 
